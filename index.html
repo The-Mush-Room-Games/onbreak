@@ -370,7 +370,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
       <li><a href="#cameras" data-ck="cmd.cameras" data-cmd="Live security feeds from Stacking Floor 7."><span class="k">F4</span><i data-lucide="cctv"></i><span data-t="nav.cameras">CAMERAS</span></a></li>
     </ul>
     <div class="counter" data-ck="cmd.counter" data-cmd="Applicants this intake cycle. Places are not limited. Neither is turnover.">
-      <span class="ico"><i data-lucide="users"></i></span><span class="k" data-t="counter.label">APPLICANTS</span><b id="applicants" data-live>41207</b>
+      <span class="ico"><i data-lucide="users"></i></span><span class="k" data-t="counter.label">APPLICANTS</span><b id="applicants" data-live>------</b>
     </div>
   </div>
 
@@ -634,9 +634,19 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
   };
   tick(); setInterval(tick, 1000);
 
-  // Applicant counter creeps up.
-  let n = 41207;
-  setInterval(() => { if (Math.random() < .35) $('#applicants').textContent = ++n }, 1400);
+  // Applicants: real page visits, kept by the free Abacus counter (abacus.jasoncameron.dev). A reload in the
+  // same tab reads the count without adding to it. If the service can't be reached the dashes stay.
+  (async () => {
+    let counted = false;
+    try { counted = sessionStorage.getItem('applicantCounted') === '1' } catch {}
+    try {
+      const r = await fetch(`https://abacus.jasoncameron.dev/${counted ? 'get' : 'hit'}/themushroom-onbreak/applicants`);
+      const { value } = await r.json();
+      if (!Number.isFinite(value)) return;
+      $('#applicants').textContent = String(value).padStart(6, '0');
+      try { sessionStorage.setItem('applicantCounted', '1') } catch {}
+    } catch {}
+  })();
 
   // Fresnel share price: a random walk with a sparkline of the last 30 ticks.
   const open = 4213.07, hist = [open];
