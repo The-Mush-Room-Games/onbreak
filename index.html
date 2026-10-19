@@ -334,6 +334,15 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
   .benefits td:first-child { white-space: normal }
   .cmd { visibility: hidden }
   .tabs, .spark, .plabel.r { display: none }
+  /* Phones: key art first and flat (Safari drops a feed pushed behind its 3D row), nothing wider than the screen */
+  html { overflow-x: clip }
+  .brand { font-size: 1.15rem }
+  .hero .feed { order: -1; transform: none }
+  .feed .osd { inset: 14px 24px }
+  .fbar a .k { display: none }
+  .fbar a { justify-content: center }
+  .deface { left: auto; right: 12px; top: 150px }
+  .deface .spray { font-size: 1.3rem }
   .editing .plabel.r { display: inline-flex; top: auto; bottom: calc(-1 * var(--bw) - .72em) }
   .editing .benefits td:nth-child(2), .editing .benefits th:nth-child(2) { display: table-cell }
   .editing .cmd { visibility: visible }
