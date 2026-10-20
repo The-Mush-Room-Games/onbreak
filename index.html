@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://onbreakgame.com/">
-<meta property="og:title" content="On Break">
+<meta property="og:title" content="On Break, a box stacking game by The Mush Room | Wishlist on Steam">
 <meta property="og:description" content="Fresnel Labs needs a Box Stacking Technician. Press the button, drop the box, build a tower that won&#x27;t topple. Chain colors, earn your pay and spend it on strange office decorations that rewrite the rules of the job. Your robot supervisor, B.A.S.I.L., thinks you&#x27;ll do great. Probably.">
 <meta property="og:image" content="https://onbreakgame.com/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/themushroom.png">
+<link rel="canonical" href="https://onbreakgame.com/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "On Break", "url": "https://onbreakgame.com/", "description": "Fresnel Labs needs a Box Stacking Technician. Press the button, drop the box, build a tower that won't topple. Chain colors, earn your pay and spend it on strange office decorations that rewrite the rules of the job. Your robot supervisor, B.A.S.I.L., thinks you'll do great. Probably.", "image": "https://onbreakgame.com/img/og.jpg", "genre": ["Arcade", "Roguelite"], "gamePlatform": ["PC", "Mac"], "operatingSystem": "Windows, macOS", "author": {"@type": "Organization", "name": "The Mush Room", "url": "https://themushroomstudio.com/"}, "offers": {"@type": "Offer", "url": "https://store.steampowered.com/app/4739760/On_Break/"}}</script>
 </head>
 <body>
-<title>On Break</title>
+<title>On Break, a box stacking game by The Mush Room | Wishlist on Steam</title>
 <meta name="description" content="Fresnel Labs needs a Box Stacking Technician. Press the button, drop the box, build a tower that won&#x27;t topple. Chain colors, earn your pay and spend it on strange office decorations that rewrite the rules of the job. Your robot supervisor, B.A.S.I.L., thinks you&#x27;ll do great. Probably.">
 <style>
 /* Layout: the page is one Fresnel Labs employee terminal (same skin as FRESNEL//STORE in game), seen as
@@ -23,6 +25,7 @@
    Every word carries data-t (or data-ck for hover text); EDIT WORDS saves them to copy.json. */
 @font-face { font-family: "lcd phone"; src: url("fonts/LcdPhone.ttf") format("truetype"); font-display: swap }
 @font-face { font-family: "Sixtyfour Convergence"; src: url("fonts/SixtyfourConvergence.ttf") format("truetype"); font-display: swap }
+@font-face { font-family: "Sixtyfour Plain"; src: url("fonts/SixtyfourPlain.ttf") format("truetype"); font-display: swap }
 @font-face { font-family: "Erbos Draco"; src: url("fonts/ErbosDraco1stOpenNBP.ttf") format("truetype"); font-display: swap }
 /* Sixtyfour is a colour font with RGB layers; these palettes keep it on the terminal's amber. */
 @font-palette-values --amber { font-family: "Sixtyfour Convergence"; override-colors: 0 #ffb000, 1 #ffc233, 2 #ffe08a, 3 #ffb000, 4 #b07a00, 5 #ffc233 }
@@ -92,6 +95,8 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
 
 /* Title bar */
 .titlebar { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; padding-block: 22px 30px }
+/* iPhone Safari leaves the COLRv1 colour font blank (seen 2026-10-19), so iOS gets the plain outlines of the same face. */
+@supports (-webkit-touch-callout: none) { :root { --display: "Sixtyfour Plain", "Courier New", monospace } .brand, .logo, .counter b { color: var(--amber-hi) } }
 .brand { font: 400 clamp(1.4rem, 3.4vw, 2.4rem)/1 var(--display); font-palette: --amber; letter-spacing: .02em }
 .tabs { display: flex; gap: 6px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; font-size: .82rem }
 .tabs a { display: flex; align-items: center; gap: 7px; text-decoration: none; padding: 4px 9px 4px 4px; border: 1px solid transparent }
@@ -375,7 +380,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
   </div>
 
   <div class="titlebar">
-    <h1 class="brand" data-t="brand">FRESNEL//CAREERS</h1>
+    <div class="brand" data-t="brand">FRESNEL//CAREERS</div>
     <ul class="tabs">
       <li><a href="#position" data-ck="cmd.position" data-cmd="Open requisition #0417-C: Box Stacking Technician."><span class="k">F1</span><i data-lucide="briefcase"></i><span data-t="nav.position">POSITION</span></a></li>
       <li><a href="#supervisor" data-ck="cmd.supervisor" data-cmd="Supervisor file: B.A.S.I.L. Partially redacted."><span class="k">F2</span><i data-lucide="bot"></i><span data-t="nav.supervisor">SUPERVISOR</span></a></li>
@@ -391,7 +396,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
     <div class="panel">
       <span class="plabel"><i data-lucide="briefcase"></i><span data-t="hero.label">[ Open position ]</span></span>
       <span class="programme" data-t="hero.kicker">FRESNEL LABS PRESENTS</span>
-      <h2 class="logo" data-t="hero.logo">ON BREAK</h2>
+      <h1 class="logo" data-t="hero.logo">ON BREAK</h1>
       <span class="motto" data-t="hero.motto">PLEASE STACK RESPONSIBLY</span>
       <p class="pitch" data-t="hero.pitch">A box-stacking roguelite. The magnetic arm moves on its own: press the button at exactly the right moment to drop the box. Chain colors, earn your pay and spend it on strange office decorations that rewrite the rules of the job.</p>
       <dl class="req" data-ck="cmd.req" data-cmd="Requisition details. Fresnel Labs is an equal opportunity employer of humans.">
