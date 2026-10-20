@@ -169,10 +169,6 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
               linear-gradient(var(--amber), var(--amber)) 0 100% / 18px 2px, linear-gradient(var(--amber), var(--amber)) 0 100% / 2px 18px,
               linear-gradient(var(--amber), var(--amber)) 100% 100% / 18px 2px, linear-gradient(var(--amber), var(--amber)) 100% 100% / 2px 18px;
   background-repeat: no-repeat; filter: drop-shadow(0 0 3px rgba(255, 176, 0, .8)) }
-.feed .osd { position: absolute; inset: 12px 16px; z-index: 3; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none;
-  font: 400 .72rem/1.3 var(--label); letter-spacing: .08em; color: var(--amber-hi); text-shadow: 0 0 4px #000, 0 0 8px #000 }
-.feed .osd > div { display: flex; justify-content: space-between; gap: 10px }
-.rec::before { content: "● "; color: var(--warn); animation: blink 1.2s steps(1) infinite }
 .feed figcaption { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; padding: 30px; text-align: center; color: var(--dim); font-size: .9rem }
 .feed:has(img) figcaption { inset: auto 0 0; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%) }
 .editing .feed:has(img) figcaption { width: auto; height: auto; padding: 6px 12px; clip-path: none; background: var(--deep); color: var(--amber); z-index: 4 }
@@ -302,7 +298,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
 .editing .sel { outline: 2px solid var(--hire) !important; outline-offset: 4px }
 .editing #cmd { outline: 1px dashed var(--hire); padding: 0 4px; cursor: text }
 .editing .cmd { white-space: normal; display: block }
-.editing .tape span, .editing .feed::before, .editing .cursor::after, .editing .rec::before { animation: none }
+.editing .tape span, .editing .feed::before, .editing .cursor::after { animation: none }
 .editing .tape { white-space: normal }
 .editing .tape span { padding-left: 16px }
 /* Editing lays everything flat so the words are easy to click */
@@ -338,18 +334,28 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
   html { overflow-x: clip }
   .brand { font-size: 1.15rem }
   .hero .feed { order: -1; transform: none }
-  .feed .osd { inset: 14px 24px }
   .fbar a .k { display: none }
   .fbar a { justify-content: center }
-  .deface { left: auto; right: 12px; top: 150px }
+  .deface { left: auto; right: 12px; top: 330px }
   .deface .spray { font-size: 1.3rem }
+  /* Phones: a short, readable top. Only the hiring flag in the status strip, brand and counter on one row */
+  .status { justify-content: center; padding-block: 6px }
+  .status > :not(.flag) { display: none }
+  .titlebar { padding-block: 14px 8px; gap: 12px; flex-wrap: nowrap; justify-content: space-between }
+  .status .flag { line-height: 1.45; text-align: center; padding: 6px 10px }
+  .counter { display: none }
+  .row { margin-block: 32px }
+  /* Hero reads top down: kicker, ON BREAK, subtitle, key art (moved in by script), then the pitch */
+  .programme, .motto { line-height: 1.5 }
+  .hero .panel > .feed { margin-block: 18px 0 }
+  .pitch { line-height: 1.6 }
   .editing .plabel.r { display: inline-flex; top: auto; bottom: calc(-1 * var(--bw) - .72em) }
   .editing .benefits td:nth-child(2), .editing .benefits th:nth-child(2) { display: table-cell }
   .editing .cmd { visibility: visible }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
-  .feed::before, .tape span, .rec::before, .cursor::after { animation: none }
+  .feed::before, .tape span, .cursor::after { animation: none }
   .tape span { padding-left: 16px }
   .panel, .hero .feed, .slot, .cams .feed { transition: none }
 }
@@ -376,7 +382,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
       <li><a href="#position" data-ck="cmd.position" data-cmd="Open requisition #0417-C: Box Stacking Technician."><span class="k">F1</span><i data-lucide="briefcase"></i><span data-t="nav.position">POSITION</span></a></li>
       <li><a href="#supervisor" data-ck="cmd.supervisor" data-cmd="Supervisor file: B.A.S.I.L. Partially redacted."><span class="k">F2</span><i data-lucide="bot"></i><span data-t="nav.supervisor">SUPERVISOR</span></a></li>
       <li><a href="#duties" data-ck="cmd.duties" data-cmd="Duties and benefits for this position."><span class="k">F3</span><i data-lucide="clipboard-list"></i><span data-t="nav.duties">DUTIES</span></a></li>
-      <li><a href="#cameras" data-ck="cmd.cameras" data-cmd="Live security feeds from Sublevel 7, Stacking Floor."><span class="k">F4</span><i data-lucide="cctv"></i><span data-t="nav.cameras">CAMERAS</span></a></li>
+      <li><a href="#cameras" data-ck="cmd.cameras" data-cmd="Site photos from Sublevel 7, Stacking Floor."><span class="k">F4</span><i data-lucide="image"></i><span data-t="nav.cameras">PHOTOS</span></a></li>
     </ul>
     <div class="counter" data-ck="cmd.counter" data-cmd="Applicants this intake cycle. Places are not limited. Neither is turnover.">
       <span class="ico"><i data-lucide="users"></i></span><span class="k" data-t="counter.label">APPLICANTS</span><b id="applicants" data-live>------</b>
@@ -407,9 +413,9 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
       </div>
       <p class="trial"><span data-t="hero.trial">Trial shift (free demo):</span> <b data-t="date.demo">Nov 2026</b></p>
     </div>
-    <figure class="feed" data-ck="cmd.cam0" data-cmd="CAM-00. Sublevel 7, Stacking Floor. Recording.">
+    <figure class="feed" data-ck="cmd.cam0" data-cmd="Sublevel 7, Stacking Floor.">
       <img src="img/keyart.jpg" alt="">
-      <div class="osd"><div><span class="rec" data-t="cam0.rec">REC</span><span data-t="cam0.name">CAM-00 · SUBLEVEL 7</span></div><div><span class="date" data-live>14.10.3026</span><span class="ts" data-live>14:32:07</span></div></div>
+      
       <figcaption data-t="cam0.cap">a tall wobbly stack, seen from the floor</figcaption>
     </figure>
     <div class="deface" aria-hidden="true"><span class="spray" data-t="deface.msg">BREAKS ARE A RIGHT</span><span class="tag" data-t="deface.tag">LOCAL 07</span></div>
@@ -498,15 +504,15 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
 
   <section class="row" id="cameras">
     <div class="panel">
-      <span class="plabel"><i data-lucide="cctv"></i><span data-t="cams.label">[ Security feeds ]</span></span>
-      <span class="plabel r" data-t="cams.status">6 OF 6 ONLINE</span>
+      <span class="plabel"><i data-lucide="image"></i><span data-t="cams.label">[ Site photos ]</span></span>
+      <span class="plabel r" data-t="cams.status">HR://SITE_PHOTOS</span>
       <div class="cams">
-        <figure class="feed" data-ck="cmd.cam1" data-cmd="CAM-01. Stacking floor, wide."><img src="img/cam1.jpg" alt="" loading="lazy"><div class="osd"><div><span class="rec" data-t="cam1.id">CAM-01</span><span data-t="cam1.name">FLOOR</span></div><div><span></span><span class="ts" data-live>14:32:07</span></div></div><figcaption data-t="cam1.cap">the stacking floor</figcaption></figure>
-        <figure class="feed" data-ck="cmd.cam2" data-cmd="CAM-02. Magnetic arm."><img src="img/cam2.jpg" alt="" loading="lazy"><div class="osd"><div><span class="rec" data-t="cam2.id">CAM-02</span><span data-t="cam2.name">ARM</span></div><div><span></span><span class="ts" data-live>14:32:07</span></div></div><figcaption data-t="cam2.cap">the magnetic arm mid-drop</figcaption></figure>
-        <figure class="feed" data-ck="cmd.cam3" data-cmd="CAM-03. Stack height exceeds recommended limits."><img src="img/cam3.jpg" alt="" loading="lazy"><div class="osd"><div><span class="rec" data-t="cam3.id">CAM-03</span><span data-t="cam3.name">STACK</span></div><div><span></span><span class="ts" data-live>14:32:07</span></div></div><figcaption data-t="cam3.cap">looking down a tall stack</figcaption></figure>
-        <figure class="feed" data-ck="cmd.cam4" data-cmd="CAM-04. Technician workspace. Personal items noted."><img src="img/cam4.jpg" alt="" loading="lazy"><div class="osd"><div><span class="rec" data-t="cam4.id">CAM-04</span><span data-t="cam4.name">DESK</span></div><div><span></span><span class="ts" data-live>14:32:07</span></div></div><figcaption data-t="cam4.cap">a decorated office</figcaption></figure>
-        <figure class="feed" data-ck="cmd.cam5" data-cmd="CAM-05. Incident under review."><img src="img/cam5.jpg" alt="" loading="lazy"><div class="osd"><div><span class="rec" data-t="cam5.id">CAM-05</span><span data-t="cam5.name">INCIDENT</span></div><div><span></span><span class="ts" data-live>14:32:07</span></div></div><figcaption data-t="cam5.cap">WORKING HAZARDS</figcaption></figure>
-        <figure class="feed" data-ck="cmd.cam6" data-cmd="CAM-06. Stacking bay overview."><img src="img/cam6.jpg" alt="" loading="lazy"><div class="osd"><div><span class="rec" data-t="cam6.id">CAM-06</span><span data-t="cam6.name">OVERVIEW</span></div><div><span></span><span class="ts" data-live>14:32:07</span></div></div><figcaption data-t="cam6.cap">the stacking bay, wide</figcaption></figure>
+        <figure class="feed" data-ck="cmd.cam1" data-cmd="Stacking floor, wide."><img src="img/cam1.jpg" alt="" loading="lazy"><figcaption data-t="cam1.cap">the stacking floor</figcaption></figure>
+        <figure class="feed" data-ck="cmd.cam2" data-cmd="Magnetic arm."><img src="img/cam2.jpg" alt="" loading="lazy"><figcaption data-t="cam2.cap">the magnetic arm mid-drop</figcaption></figure>
+        <figure class="feed" data-ck="cmd.cam3" data-cmd="Stack height exceeds recommended limits."><img src="img/cam3.jpg" alt="" loading="lazy"><figcaption data-t="cam3.cap">looking down a tall stack</figcaption></figure>
+        <figure class="feed" data-ck="cmd.cam4" data-cmd="Technician workspace. Personal items noted."><img src="img/cam4.jpg" alt="" loading="lazy"><figcaption data-t="cam4.cap">a decorated office</figcaption></figure>
+        <figure class="feed" data-ck="cmd.cam5" data-cmd="Incident under review."><img src="img/cam5.jpg" alt="" loading="lazy"><figcaption data-t="cam5.cap">WORKING HAZARDS</figcaption></figure>
+        <figure class="feed" data-ck="cmd.cam6" data-cmd="Stacking bay overview."><img src="img/cam6.jpg" alt="" loading="lazy"><figcaption data-t="cam6.cap">the stacking bay, wide</figcaption></figure>
       </div>
     </div>
   </section>
@@ -575,7 +581,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
       <a href="#position"><span class="k">F1</span><span data-t="nav.position">POSITION</span></a>
       <a href="#supervisor"><span class="k">F2</span><span data-t="nav.supervisor">SUPERVISOR</span></a>
       <a href="#duties"><span class="k">F3</span><span data-t="nav.duties">DUTIES</span></a>
-      <a href="#cameras"><span class="k">F4</span><span data-t="nav.cameras">CAMERAS</span></a>
+      <a href="#cameras"><span class="k">F4</span><span data-t="nav.cameras">PHOTOS</span></a>
       <a href="https://discord.gg/v4pTnjqYbq" target="_blank" rel="noopener" data-key="F8"><span class="k">F8</span><span data-t="fbar.breakroom">BREAKROOM</span></a>
       <a href="https://store.steampowered.com/app/4739760/On_Break/" target="_blank" rel="noopener" data-key="F9"><span class="k">F9</span><span data-t="fbar.apply">APPLY</span></a>
     </nav>
@@ -822,6 +828,11 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
       if (draft) { setEditing(true); msg('Restored your unsaved edits. SAVE WORDS keeps them.') }
     }
   })();
+  // Phones: the hero key art sits inside the panel, under the subtitle; it moves back beside the panel on wider screens
+  const heroFeed = $('.hero .feed'), motto = $('.hero .motto'), heroPanel = motto.parentElement;
+  const narrow = matchMedia('(max-width: 560px)');
+  const placeFeed = () => narrow.matches ? motto.after(heroFeed) : heroPanel.after(heroFeed);
+  placeFeed(); narrow.addEventListener('change', placeFeed);
 })();
 </script>
 
