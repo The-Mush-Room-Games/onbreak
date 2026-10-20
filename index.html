@@ -210,10 +210,9 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
 .fields { display: grid; gap: 6px; margin: 0; font-size: .9rem }
 .fields dt { color: var(--dim); font: 400 .66rem/1 var(--label); letter-spacing: .1em; margin-top: 4px }
 .fields dd { margin: 0 }
-.log { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px }
-.log li { display: grid; grid-template-columns: max-content 1fr; gap: 14px }
-.log time { color: var(--dim) }
-.log .redact { background: var(--amber); color: var(--amber); text-shadow: none; user-select: none }
+.sumh { margin: 0; font: 400 .74rem/1.4 var(--label); letter-spacing: .14em; color: var(--dim) }
+.sump { margin: 8px 0 16px; line-height: 1.55 }
+.sumreq { margin: 0 0 16px }
 .cursor::after { content: "█"; animation: blink 1s steps(1) infinite }
 
 /* Duties: store-slot cards that lift off the panel */
@@ -223,7 +222,6 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
 .slot:hover { border-color: var(--amber); transform: translateZ(44px) }
 .slot header { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; font: 400 .7rem/1 var(--label); color: var(--dim) }
 .slot header .id { border: 1px solid var(--dim); padding: 3px 5px }
-.pips { letter-spacing: 2px; color: var(--amber) }
 .slot svg { width: 64%; max-width: 150px; margin: 6px auto 12px; display: block; stroke: var(--amber); fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(255, 176, 0, .55)) }
 .slot svg .hatch { fill: url(#hatch) }
 .slot footer { border-top: 2px solid var(--line); padding: 12px }
@@ -440,40 +438,42 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
         </dl>
       </div>
     </div>
-    <div class="panel" data-ck="cmd.log" data-cmd="Excerpt from the onboarding log. Remaining entries are restricted.">
-      <span class="plabel"><i data-lucide="scroll-text"></i><span data-t="log.label">[ Onboarding log ]</span></span>
-      <span class="plabel r" data-t="log.file">HR://ORIENTATION.LOG · READ ONLY</span>
-      <ol class="log">
-        <li><time data-t="log.t1">08:59:58</time><span data-t="log.l1">B.A.S.I.L.&gt; Hello! I am the Box Arrangement And Stacking Intelligence Lead. You can call me B.A.S.I.L. for short.</span></li>
-        <li><time data-t="log.t2">09:00:04</time><span data-t="log.l2">B.A.S.I.L.&gt; Welcome to Fresnel Labs. I will be your new supervisor.</span></li>
-        <li><time data-t="log.t3">09:00:11</time><span>B.A.S.I.L.&gt; <span class="redact">████████ ██ ███████ █████</span></span></li>
-        <li><time data-t="log.t4">09:00:12</time><span><span data-t="log.l4">[ REMAINING ENTRIES RESTRICTED TO STAFF ]</span> <span class="cursor"></span></span></li>
-      </ol>
+    <div class="panel" data-ck="cmd.summary" data-cmd="Position summary for requisition #0417-C.">
+      <span class="plabel"><i data-lucide="scroll-text"></i><span data-t="sum.label">[ Position summary ]</span></span>
+      <span class="plabel r" data-t="sum.file">HR://REQ-0417.TXT</span>
+      <h3 class="sumh" data-t="sum.h">POSITION OVERVIEW</h3>
+      <p class="sump" data-t="sum.p">The Box Stacking Technician works the Stacking Floor under the direct supervision of B.A.S.I.L.</p>
+      <dl class="req sumreq">
+        <dt data-t="sum.f1.k">REPORTS TO</dt><dd data-t="sum.f1">B.A.S.I.L.</dd>
+        <dt data-t="sum.f2.k">HOURS</dt><dd data-t="sum.f2">Continuous</dd>
+        <dt data-t="sum.f3.k">TRAINING</dt><dd data-t="sum.f3">Provided on your first shift</dd>
+        <dt data-t="sum.f4.k">PURPOSE</dt><dd data-t="sum.f4">[ CLASSIFIED ]</dd>
+      </dl>
+      <p class="sump" data-t="sum.close">Fresnel Labs thanks you for your interest. We have been expecting you.</p>
     </div>
   </section>
 
   <section class="row" id="duties">
     <div class="panel">
       <span class="plabel"><i data-lucide="clipboard-list"></i><span data-t="duties.label">[ Duties ]</span></span>
-      <span class="plabel r" data-t="duties.rating">HAZARD RATING</span>
       <div class="slots">
         <article class="slot" data-ck="cmd.a1" data-cmd="A1: magnetic arm. Watch it carefully. Press the button.">
-          <header><span class="id">A1</span><span class="pips">■■□□□</span></header>
+          <header><span class="id">A1</span></header>
           <svg viewBox="0 0 120 100" aria-hidden="true"><path d="M10 8h100M60 8v14"/><rect x="36" y="22" width="48" height="14" class="hatch"/><path d="M32 38h56"/><path d="M42 46q18 7 36 0M46 53q14 5 28 0" stroke-dasharray="3 5"/><rect x="40" y="62" width="40" height="30" class="hatch"/></svg>
           <footer><h3 data-t="duty.a1.h">Watch the magnetic arm</h3><p data-t="duty.a1.p">It moves on its own. Press the button at exactly the right moment to drop the box. Then do it again.</p></footer>
         </article>
         <article class="slot" data-ck="cmd.a2" data-cmd="A2: color matching. Management loves a pattern.">
-          <header><span class="id">A2</span><span class="pips">■■■□□</span></header>
+          <header><span class="id">A2</span></header>
           <svg viewBox="0 0 120 100" aria-hidden="true"><rect x="14" y="56" width="28" height="28" class="hatch"/><rect x="46" y="56" width="28" height="28" class="hatch"/><rect x="78" y="56" width="28" height="28" class="hatch"/><rect x="46" y="22" width="28" height="28"/><path d="M28 46v-6M92 46v-6"/></svg>
           <footer><h3 data-t="duty.a2.h">Match colors</h3><p data-t="duty.a2.p">Match three boxes of the same color for a Three In A Row bonus. Management loves a pattern.</p></footer>
         </article>
         <article class="slot" data-ck="cmd.a3" data-cmd="A3: quota. Stack more than half before the boxes run out.">
-          <header><span class="id">A3</span><span class="pips">■■■■□</span></header>
+          <header><span class="id">A3</span></header>
           <svg viewBox="0 0 120 100" aria-hidden="true"><path d="M14 88h92M20 88V78h80v10"/><rect x="30" y="54" width="26" height="24" class="hatch"/><rect x="62" y="54" width="26" height="24" class="hatch"/><rect x="46" y="28" width="26" height="26"/><path d="M104 18v60M98 18h12M98 48h12"/></svg>
           <footer><h3 data-t="duty.a3.h">Hit quota</h3><p data-t="duty.a3.p">Stack more than half of your assigned quota before the boxes run out. Every fourth round includes a Promotion Review.</p></footer>
         </article>
         <article class="slot" data-ck="cmd.a4" data-cmd="A4: office. 20 spots to decorate, within approved guidelines.">
-          <header><span class="id">A4</span><span class="pips">■□□□□</span></header>
+          <header><span class="id">A4</span></header>
           <svg viewBox="0 0 120 100" aria-hidden="true"><path d="M10 70h100M20 70v20M100 70v20"/><rect x="26" y="42" width="22" height="28" class="hatch"/><path d="M37 42c-8-10-2-22 0-26 2 4 8 16 0 26"/><rect x="62" y="30" width="38" height="28"/><path d="M81 58v12M70 70h22"/></svg>
           <footer><h3 data-t="duty.a4.h">Decorate your office</h3><p data-t="duty.a4.p">Spend your pay at the Fresnel Company Store. Over 100 office decorations, each one bending the rules of your workday.</p></footer>
         </article>
