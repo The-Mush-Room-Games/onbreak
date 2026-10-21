@@ -16,6 +16,16 @@
 <body>
 <title>On Break, a box stacking game by The Mush Room | Wishlist on Steam</title>
 <meta name="description" content="Fresnel Labs needs a Box Stacking Technician. Press the button, drop the box, build a tower that won&#x27;t topple. Chain colors, earn your pay and spend it on strange office decorations that rewrite the rules of the job. Your robot supervisor, B.A.S.I.L., thinks you&#x27;ll do great. Probably.">
+<script>
+// No hardware acceleration (GPU off or blocklisted): the CPU draws every frame, so the page holds still and lays its
+// 3D flat (class "lite"). Set before the first paint. ?motion=0 or ?motion=1 forces either look.
+(() => {
+  const force = new URLSearchParams(location.search).get('motion');
+  const gl = force ? null : document.createElement('canvas').getContext('webgl', { failIfMajorPerformanceCaveat: true });
+  gl?.getExtension('WEBGL_lose_context')?.loseContext();
+  document.documentElement.classList.toggle('lite', force ? force === '0' : !gl);
+})();
+</script>
 <style>
 /* Layout: the page is one Fresnel Labs employee terminal (same skin as FRESNEL//STORE in game), seen as
    holograms floating in a dark room in 3026. Each panel hangs at its own depth with copies of its outline
@@ -362,6 +372,11 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
   .tape span { padding-left: 16px }
   .panel, .hero .feed, .slot, .cams .feed { transition: none }
 }
+/* No hardware acceleration (see the script at the top): Reduce Motion's stillness, and the panels laid flat */
+:root.lite { scroll-behavior: auto }
+.lite .feed::before, .lite .tape span, .lite .cursor::after { animation: none }
+.lite .tape span { padding-left: 16px }
+.lite .panel, .lite .panel > *, .lite .feed, .lite .slot { transform: none !important; transition: none }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -598,7 +613,7 @@ svg.lucide { width: 1em; height: 1em; stroke-width: 1.75; flex: none; filter: dr
 (() => {
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   const cmd = $('#cmd');
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('lite');
 
   // Icons, drawn like the GDD dashboard's (the page still works if the icon script can't load).
   try { window.lucide?.createIcons({ attrs: { 'stroke-width': 1.75 } }) } catch {}
